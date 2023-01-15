@@ -5,26 +5,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="None">
   
   
-  <link rel="shortcut icon" href="img/favicon.ico">
+  
+  <link rel="shortcut icon" href="./img/favicon.ico">
   <title>Yilin's Blog</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-  <link rel="stylesheet" href="css/theme.css" />
-  <link rel="stylesheet" href="css/theme_extra.css" />
+  <link rel="stylesheet" href="./css/theme.css" />
+  <link rel="stylesheet" href="./css/theme_extra.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
   
-  <script>
-    // Current page data
-    var mkdocs_page_name = "HOME";
-    var mkdocs_page_input_path = "index.md";
-    var mkdocs_page_url = null;
-  </script>
-  
-  <script src="js/jquery-2.1.1.min.js" defer></script>
-  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="./js/jquery-2.1.1.min.js" defer></script>
+  <script src="./js/modernizr-2.8.3.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/rust.min.js"></script>
@@ -39,7 +32,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> Yilin's Blog</a>
+        <a href="./." class="icon icon-home"> Yilin's Blog</a>
         <div role="search">
   <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
@@ -48,21 +41,17 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href=".">HOME</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#list-of-class-in-school">List of Class in School</a>
-    </li>
-    </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="./.">HOME</a>
                     </li>
                 </ul>
                 <p class="caption"><span class="caption-text">Class Note</span></p>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="class-in-school/class-list/">Class List</a>
+                    <li class="toctree-l1"><a class="reference internal" href="./class-in-school/class-list/">Class List</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="about/">ABOUT</a>
+                    <li class="toctree-l1"><a class="reference internal" href="./about/">ABOUT</a>
                     </li>
                 </ul>
       </div>
@@ -74,7 +63,7 @@
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
         <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">Yilin's Blog</a>
+        <a href="./.">Yilin's Blog</a>
       </nav>
 
       
@@ -82,11 +71,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
+    <li><a href="./.">Docs</a> &raquo;</li>
     
-      
     
-    <li>HOME</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -98,21 +85,22 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="welcome-to-yilins-blog">Welcome to Yilin's Blog!</h1>
-<p>This blog website contains one list for now. I'll add some more interesting staffs later.</p>
-<h2 id="list-of-class-in-school">List of Class in School</h2>
-<p>This list contains the major class I took in past three years in Fudan University. </p>
-              
+
+  <h1 id="search">Search Results</h1>
+
+  <form id="content_search" action="search.html">
+    <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
+    <input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off" autofocus title="Type search term here">
+  </form>
+
+  <div id="mkdocs-search-results" class="search-results" data-no-results-text="No results found">
+    Searching...
+  </div>
+
+
             </div>
           </div>
           <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="class-in-school/class-list/" class="btn btn-neutral float-right" title="Class List">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
-    </div>
   
 
   <hr/>
@@ -137,14 +125,12 @@
     
     
     
-      <span><a href="class-in-school/class-list/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
   </span>
 </div>
     <script>var base_url = '.';</script>
-    <script src="js/theme_extra.js" defer></script>
-    <script src="js/theme.js" defer></script>
-      <script src="search/main.js" defer></script>
+    <script src="./js/theme_extra.js" defer></script>
+    <script src="./js/theme.js" defer></script>
+      <script src="./search/main.js" defer></script>
     <script defer>
         window.onload = function () {
             SphinxRtdTheme.Navigation.enable(true);
@@ -153,8 +139,3 @@
 
 </body>
 </html>
-
-<!--
-MkDocs version : 1.2.2
-Build Date UTC : 2023-01-15 06:51:10.868908+00:00
--->
