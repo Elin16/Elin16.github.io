@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Yilin Huang">
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Algorithm Class Note - Yilin's Blog</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../../css/header.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Algorithm Class Note";
+    var mkdocs_page_input_path = "self-learning/Algorithm/Lec2-Union-Find.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/rust.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Yilin's Blog</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">HOME</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Class Note</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../class-in-school/class-list/">Class List</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../class-in-school/major-class/">Class List2</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Self Learning</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../course-list/">Course List</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Notes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="#">Algorithm</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../Lec1-Intro/">Introduction</a>
+                </li>
+                <li class="toctree-l3"><a class="" href="../Lec2-Union.md">Union Find</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Software Career</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../software-engineering/what-is-se/">What is software engineering</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../about/">ABOUT</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Yilin's Blog</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Algorithm Class Note</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Elin16/Elin16.github.io/edit/master/docs/self-learning/Algorithm/Lec2-Union-Find.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="algorithm-class-note">Algorithm Class Note</h1>
+<p>Steps to developing a usable algorithm.
+- Model the problem.
+- Find an algorithm to solve it.
+- Fast enough? Fits in memory?
+- If not, figure out why.
+- Find a way to address the problem.
+- Iterate until satisfied</p>
+<h2 id="15-union-find">1.5 Union Find</h2>
+<h3 id="problem">Problem</h3>
+<p>Given a set of N objects.
+- Union command: connect tow objects
+- Find/connected query: is there a oath connecting the tow objects?</p>
+<h3 id="model">Model</h3>
+<ul>
+<li>Mapping the objects 0 to N-1</li>
+<li>Use integers as array index.</li>
+<li>Suppress details not relevant to union-find</li>
+<li>Assume "is connected to" is an equivalence relation: the relation of connected satisfies is Reflecive, Symmetric and Transitive.</li>
+<li>Connected components. Maximal set of objects that are mutually
+connected. </li>
+</ul>
+<pre><code class="language-java">public class UF
+UF(int N) //initialize union-find data structure with N objects (0 to N – 1)
+void union(int p, int q) //add connection between p and q
+boolean connected(int p, int q) // are p and q in the same component?
+int find(int p) //component identifier for p (0 to N – 1)
+int count() //number of components
+</code></pre>
+<h3 id="algorithm">Algorithm</h3>
+<h4 id="1-quick-find-eager-approach">1 Quick-find [eager approach]</h4>
+<ul>
+<li>Data structure.</li>
+<li>Integer array id[] of length N.</li>
+<li>Interpretation: p and q are connected iff they have the same id.</li>
+<li>Find. </li>
+<li>Check if p and q have the same id.</li>
+<li>Union. </li>
+<li>To merge components containing p and q, change all entries whose id equals id[p] to id[q].</li>
+<li>Implementation</li>
+<li>Initialize O(n)<ul>
+<li>id[i] = i</li>
+</ul>
+</li>
+<li>Union p, q O(n)<ul>
+<li>set all id[i] == id[p] to id[q]</li>
+</ul>
+</li>
+<li>IsUnion O(1)</li>
+<li>Drawbacks</li>
+<li>Too slow. If these are N union operation, it costs $N^2$ time to run.</li>
+<li>Quadratic time is much to slow.</li>
+</ul>
+<h3 id="2-quick-union-lazy-approach">2 Quick-union [lazy approach]</h3>
+<ul>
+<li>Data structure.</li>
+<li>Integer array id[] of length N.</li>
+<li>Interpretation: id[i] is parent of i.</li>
+<li>Root of i is id[id[id[...id[i]...]]]: keep going until it doesn’t change(algorithm ensures no cycles)</li>
+<li>Find O(N)</li>
+<li>Check if p and q have the same root.</li>
+<li>Union O(N)</li>
+<li>To merge components containing p and q, set the id of p's root to the id of q's root.</li>
+<li>Defect</li>
+<li>Trees can get tall so that each time we costs O(N) to find root.</li>
+</ul>
+<h4 id="improvement-1-weighting">Improvement 1: weighting</h4>
+<ul>
+<li>Weighted quick-union.</li>
+<li>Modify quick-union to avoid tall trees.</li>
+<li>Keep track of size of each tree (number of objects).</li>
+<li>Balance by linking root of smaller tree to root of larger tree.</li>
+<li>Implement</li>
+<li>Maintain a <code>size[]</code> array to record each tree's size</li>
+<li>Initialize it with <code>size[i] = 1</code></li>
+<li>Consolt and Update <code>size[]</code> when union operation</li>
+<li>Running time.</li>
+<li>Find: takes time proportional to depth of p and q. $O(lg(N^+))$</li>
+<li>Union: takes constant time, given roots.  $O(lg(N^+))$</li>
+<li>By limiting the depth of trees, the time of find root reduced from $O(N)$ to $O(lg(N^+))$</li>
+<li>Proposition. </li>
+<li>Depth of any node x is at most $lg N$.</li>
+<li>Pf. </li>
+<li>When does depth of x increase?</li>
+<li>Increases by 1 when tree T1 containing x is merged into another tree T2.</li>
+<li>The size of the tree containing x at least doubles since $| T 2 | ≥ | T 1 |$.</li>
+<li>Size of tree containing x can double at most lg N times. For $ N = 2^(lgN)$</li>
+</ul>
+<p>Comparision of $N$ and $lgN$ 
+ $N$ | $lgN$ 
+-- | --
+| 1  | 0  |
+| 1 thousand | 10|
+| 1 million | 20 |
+| 1 billion | 30 |</p>
+<p>iterate log function $lg^{*} N$ is the number of times the logarithm function must be iteratively applied before the result is less than or equal to 1.</p>
+<h4 id="improvement-2-path-compressing">Improvement 2: path compressing</h4>
+<ul>
+<li>Impletation<ul>
+<li>Add an extra loop to renew the root. </li>
+<li>Or set id[i] = id[id[i]].</li>
+<li>The last one is simple and good enough in pratice. Even though it may encounter N depth situation.</li>
+</ul>
+</li>
+<li>Proposition. [Hopcroft-Ulman, Tarjan] </li>
+<li>Starting from an empty data structure, any sequence of M union-find ops on N objects makes ≤ $c ( N + M lg^* N )$ array accesses.</li>
+<li>Amazing fact. [Fredman-Saks] </li>
+<li>No linear-time algorithm exists.</li>
+<li>Ex. </li>
+<li>[$10^9$ unions and finds with $10^9$ objects]</li>
+<li>WQUPC (Weighted Quick-Union with Path Compression) reduces time from 30 years to 6 seconds.</li>
+<li>Supercomputer won't help much; <strong>good algorithm enables solution.</strong></li>
+</ul>
+<h3 id="application">Application</h3>
+<ul>
+<li>Monte Carlo simulation TO find percolation possibility</li>
+<li>Create virtual sites which presents top and bottom [So smart!]</li>
+<li>Remain Problem: how to tell the full sites from site?</li>
+<li>Answer: if the neightbor is full, full it!</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Elin16/Elin16.github.io/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
