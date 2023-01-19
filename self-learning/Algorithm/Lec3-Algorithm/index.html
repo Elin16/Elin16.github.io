@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Yilin Huang">
+  
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+  <title>Algorithm Class Note - Yilin's Blog</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../../css/theme.css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+  <link href="../../../css/header.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Algorithm Class Note";
+    var mkdocs_page_input_path = "self-learning/Algorithm/Lec3-Algorithm.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/yaml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/rust.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Yilin's Blog</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../..">HOME</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Class Note</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../class-in-school/class-list/">Class List</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../class-in-school/major-class/">Class List2</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Self Learning</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../course-list/">Course List</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="#">Notes</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="#">Algorithm</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../Lec1-Intro/">Introduction</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../Lec2-Union-Find/">Union Find</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Software Career</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../software-engineering/what-is-se/">What is software engineering</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../../about/">ABOUT</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Yilin's Blog</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Algorithm Class Note</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Elin16/Elin16.github.io/edit/master/docs/self-learning/Algorithm/Lec3-Algorithm.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="algorithm-class-note">Algorithm Class Note</h1>
+<h2 id="14-analysis-of-algorithms">1.4 ANALYSIS OF ALGORITHMS</h2>
+<h3 id="introduction">Introduction</h3>
+<h4 id="scientific-method-applied-to-analysis-of-algorithms">Scientific method applied to analysis of algorithms</h4>
+<ul>
+<li>Scientific method</li>
+<li>Observe some feature of the natural world. 观察</li>
+<li>Hypothesize a model that is consistent with the observations. 假设</li>
+<li>Predict events using the hypothesis. 利用假设预测</li>
+<li>Verify the predictions by making further observations. 根据更多的观察验证假设</li>
+<li>Validate by repeating until the hypothesis and observations agree. 如此迭代直到假设与观察相一致</li>
+<li>Principles.</li>
+<li>Experiments must be reproducible. 实验可再现</li>
+<li>Hypotheses must be falsifiable. 假设可证伪</li>
+</ul>
+<h3 id="observations">Observations</h3>
+<ul>
+<li>power law aN^b 幂定律</li>
+<li>Data analysis</li>
+<li>Standard plot. Plot running time T (N) vs. input size N</li>
+<li>Log-log plot. Plot running time T (N) vs. input size N using log-log scale<ul>
+<li>Do log-log plot to see if the complex is a*N^b (which will turn a straight line)</li>
+</ul>
+</li>
+<li>Prediction and validation</li>
+<li>Doubling hypothesis. <ul>
+<li>Quick way to estimate b in a power-law relationship.</li>
+<li>Run program, doubling the size of the input</li>
+<li>How to estimate a in a power-law relationship? Run sufficient large value of N</li>
+</ul>
+</li>
+<li>System independent effects. <strong>determines exponent b in power law</strong></li>
+<li>Algorithm.</li>
+<li>Input data.</li>
+<li>System dependent effects. <strong>determines constant a in power law</strong></li>
+<li>Hardware: CPU, memory, cache, …</li>
+<li>Software: compiler, interpreter, garbage collector, …</li>
+<li>System: operating system, network, other apps, …</li>
+</ul>
+<h3 id="mathematical-models">Mathematical Models</h3>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/Elin16/Elin16.github.io/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme_extra.js" defer></script>
+    <script src="../../../js/theme.js" defer></script>
+      <script src="../../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
