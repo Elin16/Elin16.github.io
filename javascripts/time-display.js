@@ -13,9 +13,10 @@ function change_picture() {
     date = new Date();
     var hour = date.getHours();
     var minute = date.getMinutes();
-    if (minute%2) {
+    if (hour <22) {
         document.getElementById("timePicture").src = "img/playing.jpeg";
     } else {
+        document.getElementById("timeMessage").innerHTML = "Time to rest body & mind ~";
         document.getElementById("timePicture").src = "img/sleeping.jpeg";
     }
 }
