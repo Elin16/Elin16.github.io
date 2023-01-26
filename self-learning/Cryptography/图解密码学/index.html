@@ -9,7 +9,7 @@
   <meta name="author" content="Yilin Huang">
   
   <link rel="shortcut icon" href="../../../img/favicon.ico">
-  <title>Algorithm Class Note - Yilin's Blog</title>
+  <title>图解密码学阅读笔记 - Yilin's Blog</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../../../css/theme.css" />
@@ -19,8 +19,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Algorithm Class Note";
-    var mkdocs_page_input_path = "self-learning/Algorithm/Lec3-Algorithm.md";
+    var mkdocs_page_name = "\u56fe\u89e3\u5bc6\u7801\u5b66\u9605\u8bfb\u7b14\u8bb0";
+    var mkdocs_page_input_path = "self-learning/Cryptography/\u56fe\u89e3\u5bc6\u7801\u5b66.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -68,9 +68,9 @@
     <ul>
                 <li class="toctree-l2"><a class="reference internal" href="#">Algorithm</a>
     <ul>
-                <li class="toctree-l3"><a class="reference internal" href="../Lec1-Intro/">Introduction</a>
+                <li class="toctree-l3"><a class="reference internal" href="../../Algorithm/Lec1-Intro/">Introduction</a>
                 </li>
-                <li class="toctree-l3"><a class="reference internal" href="../Lec2-Union-Find/">Union Find</a>
+                <li class="toctree-l3"><a class="reference internal" href="../../Algorithm/Lec2-Union-Find/">Union Find</a>
                 </li>
     </ul>
                 </li>
@@ -111,10 +111,10 @@
     
       
     
-    <li>Algorithm Class Note</li>
+    <li>图解密码学阅读笔记</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/Elin16/Elin16.github.io/edit/master/docs/self-learning/Algorithm/Lec3-Algorithm.md"
+        <a href="https://github.com/Elin16/Elin16.github.io/edit/master/docs/self-learning/Cryptography/图解密码学.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -126,46 +126,167 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="algorithm-class-note">Algorithm Class Note</h1>
-<h2 id="14-analysis-of-algorithms">1.4 ANALYSIS OF ALGORITHMS</h2>
-<h3 id="introduction">Introduction</h3>
-<h4 id="scientific-method-applied-to-analysis-of-algorithms">Scientific method applied to analysis of algorithms</h4>
+                <h1 id="_1">图解密码学阅读笔记</h1>
+<h2 id="_2">第一部分： 密码</h2>
+<h3 id="_3">第一章 环游密码世界</h3>
+<p>术语表</p>
+<table>
+<thead>
+<tr>
+<th>English</th>
+<th>Chinese</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sender</td>
+<td>发送者</td>
+</tr>
+<tr>
+<td>reviever</td>
+<td>接收者</td>
+</tr>
+<tr>
+<td>eavesdropper</td>
+<td>窃听者</td>
+</tr>
+<tr>
+<td>encrypt</td>
+<td>加密</td>
+</tr>
+<tr>
+<td>decrypt</td>
+<td>解密</td>
+</tr>
+<tr>
+<td>plaintext</td>
+<td>明文</td>
+</tr>
+<tr>
+<td>cipgertext</td>
+<td>秘文</td>
+</tr>
+<tr>
+<td>cryptography</td>
+<td>--</td>
+</tr>
+<tr>
+<td>confidentiality</td>
+<td>--</td>
+</tr>
+<tr>
+<td>cryptanalysis</td>
+<td>--</td>
+</tr>
+<tr>
+<td>cryptanalyst</td>
+<td>--</td>
+</tr>
+<tr>
+<td>key</td>
+<td>密钥</td>
+</tr>
+<tr>
+<td>symmetric cryptography</td>
+<td>对称密码，加密和解密时使用同一密钥</td>
+</tr>
+<tr>
+<td>public-key cryptography/ asymmetric cryptography</td>
+<td>公钥密码/非对称密码，加密和解密时使用不同密钥</td>
+</tr>
+<tr>
+<td>hybrid cryptosystem</td>
+<td></td>
+</tr>
+<tr>
+<td>one-way hash function</td>
+<td>单向散列函数，验证完整性</td>
+</tr>
+<tr>
+<td>integrity</td>
+<td>完整性</td>
+</tr>
+<tr>
+<td>message authoentication code</td>
+<td></td>
+</tr>
+<tr>
+<td>authentication</td>
+<td></td>
+</tr>
+<tr>
+<td>spoofing</td>
+<td>伪装</td>
+</tr>
+<tr>
+<td>repudiation</td>
+<td>否认</td>
+</tr>
+<tr>
+<td>digital signature</td>
+<td>数字签名</td>
+</tr>
+<tr>
+<td>verify</td>
+<td></td>
+</tr>
+<tr>
+<td>Pseudo Random Number Generator, PRNG</td>
+<td>伪随机数生成器</td>
+</tr>
+<tr>
+<td>Casesar cipher</td>
+<td>凯撒密码</td>
+</tr>
+<tr>
+<td>brute-force attack</td>
+<td>暴力破解</td>
+</tr>
+<tr>
+<td>exhaustive search</td>
+<td>穷举</td>
+</tr>
+</tbody>
+</table>
+<p>密码学家的工具箱：
+- 对称密码：机密性（窃听）
+- 公钥密码：机密性
+- 单向散列函数：完整性（篡改）
+- 消息认证码：完整性，认证（伪装）
+- 数字签名：完整性，认证，不可否认性（否认）</p>
+<p>区别隐写术和密码：
+- 隐写术：隐藏消息本身
+- 密码：隐藏内容</p>
+<p>密码与信息安全常识：
+- 不要使用保密的密码算法
+- 使用低强度的密码比不进行加密更危险，这使得使用者麻痹大意
+- 密码总有一天会被破解
+- 密码只是信息安全的一部分</p>
+<h3 id="_4">第二章 历史上的密码</h3>
+<h4 id="_5">凯撒密码</h4>
 <ul>
-<li>Scientific method</li>
-<li>Observe some feature of the natural world. 观察</li>
-<li>Hypothesize a model that is consistent with the observations. 假设</li>
-<li>Predict events using the hypothesis. 利用假设预测</li>
-<li>Verify the predictions by making further observations. 根据更多的观察验证假设</li>
-<li>Validate by repeating until the hypothesis and observations agree. 如此迭代直到假设与观察相一致</li>
-<li>Principles.</li>
-<li>Experiments must be reproducible. 实验可再现</li>
-<li>Hypotheses must be falsifiable. 假设可证伪</li>
+<li>加密方式：新字母 = 字母在字母表中平移<code>k</code>个位置后的字母。<code>k</code>为密钥。</li>
+<li>可以采用暴力破解
+<a href="../CaesarCipherDecrypt.c">暴力破解代码</a></li>
 </ul>
-<h3 id="observations">Observations</h3>
+<h4 id="_6">简单替换密码</h4>
 <ul>
-<li>power law aN^b 幂定律</li>
-<li>Data analysis</li>
-<li>Standard plot. Plot running time T (N) vs. input size N</li>
-<li>Log-log plot. Plot running time T (N) vs. input size N using log-log scale<ul>
-<li>Do log-log plot to see if the complex is a*N^b (which will turn a straight line)</li>
+<li>Mapping：将原字母表映射到自身，产生新的字母表。</li>
+<li>可能性为<code>26!</code>种，暴力难以在短时间内找到解密表</li>
+<li>可以用频率分析来破译密码</li>
 </ul>
-</li>
-<li>Prediction and validation</li>
-<li>Doubling hypothesis. <ul>
-<li>Quick way to estimate b in a power-law relationship.</li>
-<li>Run program, doubling the size of the input</li>
-<li>How to estimate a in a power-law relationship? Run sufficient large value of N</li>
+<h4 id="enigma">Enigma</h4>
+<h4 id="vs">密码算法vs密钥</h4>
+<h3 id="_7">第三章 对称密码（共享密钥密码）</h3>
+<h4 id="des">DES</h4>
+<ul>
+<li>实现：Festel网络</li>
+<li>原理：利用<code>xor</code>的性质</li>
 </ul>
-</li>
-<li>System independent effects. <strong>determines exponent b in power law</strong></li>
-<li>Algorithm.</li>
-<li>Input data.</li>
-<li>System dependent effects. <strong>determines constant a in power law</strong></li>
-<li>Hardware: CPU, memory, cache, …</li>
-<li>Software: compiler, interpreter, garbage collector, …</li>
-<li>System: operating system, network, other apps, …</li>
-</ul>
-<h3 id="mathematical-models">Mathematical Models</h3>
+<h4 id="des_1">三重DES</h4>
+<h3 id="_8">第四章 分组密码的模式</h3>
+<p>分组密码：只能加密固定长度的明文。要用分组密码加密任意长度的明文，需要对分组密码进行迭代。
+分组密码的模式：分组密码的迭代方式。</p>
               
             </div>
           </div>
